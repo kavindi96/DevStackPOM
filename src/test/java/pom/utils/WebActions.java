@@ -39,7 +39,9 @@ public class WebActions {
         try{
             WebElement el = waitForElement(element);
             el.click();
+            ExtentReportManager.passLog("Clicked on element "+ element);
         }catch (NoSuchElementException e){
+            ExtentReportManager.failLog("Element not found : " + element);
             e.printStackTrace();
         }
     }
@@ -50,7 +52,9 @@ public class WebActions {
             el.click();
             el.clear();
             el.sendKeys(text);
+            ExtentReportManager.passLog("Typed : "+text+"to element : "+element);// type <text> to element <locator>
         }catch (NoSuchElementException e){
+            ExtentReportManager.failLog("Can not find such element : "+element);
             e.printStackTrace();
         }
     }
@@ -60,7 +64,9 @@ public class WebActions {
             WebElement el = waitForElement(element);
             Select select =new Select(element);
             select.selectByVisibleText(text);
+            ExtentReportManager.passLog("Selected : "+text+" , to element : "+element);
         }catch (NoSuchElementException e){
+            ExtentReportManager.failLog("Can not find such element : "+element);
             e.printStackTrace();
         }
     }
