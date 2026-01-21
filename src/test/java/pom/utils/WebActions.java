@@ -52,9 +52,9 @@ public class WebActions {
             el.click();
             el.clear();
             el.sendKeys(text);
-            ExtentReportManager.passLog("Typed : "+text+"to element : "+element);// type <text> to element <locator>
+            ExtentReportManager.passLog("Typed : "+text+"to element : "+element.toString().split(">")[1]);// type <text> to element <locator>
         }catch (NoSuchElementException e){
-            ExtentReportManager.failLog("Can not find such element : "+element);
+            ExtentReportManager.failLog("Can not find such element : "+element.toString().split(">")[1]);
             e.printStackTrace();
         }
     }
@@ -64,9 +64,9 @@ public class WebActions {
             WebElement el = waitForElement(element);
             Select select =new Select(element);
             select.selectByVisibleText(text);
-            ExtentReportManager.passLog("Selected : "+text+" , to element : "+element);
+            ExtentReportManager.passLog("Selected : "+text+" , to element : "+element.toString().split(">")[1]);
         }catch (NoSuchElementException e){
-            ExtentReportManager.failLog("Can not find such element : "+element);
+            ExtentReportManager.failLog("Can not find such element : "+element.toString().split(">")[1]);
             e.printStackTrace();
         }
     }
