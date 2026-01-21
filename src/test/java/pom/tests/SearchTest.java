@@ -3,6 +3,7 @@ package pom.tests;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pom.pages.ClothSearchPage;
 import pom.pages.MobileSearchPage;
@@ -12,8 +13,15 @@ import pom.utils.TreadLocalWebDriver;
 public class SearchTest {
  //   private MobileSearchPage mobileSearchPage;
  //   private ClothSearchPage clothSearchPage;
-
     private SearchItemPage searchItemPage;
+
+    @DataProvider(name = "searchData")
+    public Object[][] searchItemData(){
+        return new Object[][]{
+                {"iphone","Cell Phones & Accessories"},
+                {"Men's T-shirts","Clothing, Shoes & Accessories"}
+        };
+    }
 
     @BeforeMethod
     public void setup(){
@@ -34,16 +42,22 @@ public class SearchTest {
  //   public void searchForMensTShirts(){
 //        clothSearchPage.searchClothing("Men's T-Shirt");
 //    }
+//
+  //   @Test
+//    public void searchItemIphone(){
+  //      searchItemPage.searchItem("iPhone","Cell Phones & Accessories");
+ //   }
+//
+  //   @Test
+  //  public void searchItemCloth(){
+  //      searchItemPage.searchItem("Men's t-shirt","Clothing, Shoes & Accessories");
+  //  }
+//
 
-    @Test
-    public void searchItemIphone(){
-        searchItemPage.searchItem("iPhone","Cell Phones & Accessories");
-    }
-
-    @Test
-    public void searchItemCloth(){
-        searchItemPage.searchItem("Men's t-shirt","Clothing, Shoes & Accessories");
-    }
+    @Test(dataProvider = "searchData")
+     public void searchForItem(String itemName,String categoryName){
+        searchItemPage.searchItem(itemName,categoryName);
+     }
 
     @AfterMethod
     public void tearDown(){
